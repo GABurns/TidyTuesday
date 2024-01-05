@@ -10,6 +10,7 @@
 # Load Libraries ----------------------------------------------------------
 
 library(tidyverse)
+library(ggforce)
 library(tidyquant)
 library(camcorder)
 library(lubridate)
@@ -27,7 +28,7 @@ showtext_auto()
 GoogleGreen <- "#008744"
 GoogleBlue <- "#0057e7"
 GoogleRed <- "#d62d20"
-GoogleOrange <-"#ffa700"
+GoogleOrange <- "#ffa700"
 
 
 # Load Data ---------------------------------------------------------------
@@ -49,7 +50,21 @@ data <-  data |>
 AnnotationData <-  data |>
   group_by(name)  |>
   filter(value == max(value)) |>
-  mutate(desc = c("Searches for Hangover Cure peak at 9am on NYD", "Searches for Gym Membership peak at 10pm on NYD"))
+  ungroup() |>
+  mutate(
+    label = c("Hangover Cure", "Gym Membership"),
+    desc = c("Searches peak at 9am on NYD", "Searches peak at 10pm on NYD")
+  )
+
+# Data for Arrows
+ArrowData <- tibble(x = rep(min(data$Time) - (60 * 60 * 5), 2),
+                    y = c(60, 40),
+                    xend = rep(min(data$Time) - (60 * 60 * 5), 2),
+                    yend = c(90, 10))
+
+# Decided to manually lower the points for annotation so they're aligned with moving average lines
+# rather than curves
+AnnotationData$value <- AnnotationData$value - c(16, 10)
 
 # Plot --------------------------------------------------------------------
 # For Camcorder using vignette arguments
@@ -73,7 +88,22 @@ ggplot(data, aes(
   colour = as.factor(name)
 )) +
   geom_point(alpha = 0.2, size = 1) +
-  geom_ma(n = 5, linetype = "solid", size = 1.5) +
+  geom_ma(n = 5, linetype = "solid") +
+  geom_mark_ellipse(
+    data = AnnotationData,
+    aes(
+      fill = name,
+      label = label,
+      description = desc
+    ),
+    n = 1,
+    expand = 0,
+    label.family = "Noto",
+    label.fontsize = 16,
+    con.colour = c(GoogleBlue, GoogleGreen),
+    label.buffer = unit(15, 'mm')
+  ) +
+  geom_segment(data = ArrowData, aes(x = x, y = y, xend = xend, yend = yend), arrow = arrow(length = unit(2, "mm")), colour = GoogleRed) +
   scale_color_manual(values = c(GoogleBlue, GoogleGreen)) +
   scale_y_continuous(
     labels = c("Less Searches", "More Searches"),
@@ -119,11 +149,17 @@ ggplot(data, aes(
     axis.ticks.x = element_line(color = GoogleRed),
     legend.position = "none",
     plot.caption.position = "plot",
-    plot.caption = element_text(family = "Noto", colour = GoogleOrange, size = 18),
+    plot.caption = element_text(
+      family = "Noto",
+      colour = GoogleOrange,
+      size = 26
+    ),
     plot.margin = margin(rep(20, 4))
   ) +
-  ggtitle(label = "<span style = 'font-size:36pt'><b>Google Search Trends</b><br></span>
-          <span style = 'font-size:24pt'>Search Trends for <span style = 'color:#008744;'>'Hangover Cure'</span> and <span style = 'color:#0057e7;'>'Gym Membership'</span> over the new year period</span>") +
+  ggtitle(
+    label = "<span style = 'font-size:36pt'><b>Google Search Trends</b><br></span>
+          <span style = 'font-size:24pt'>Search Trends for <span style = 'color:#008744;'>'Hangover Cure'</span> and <span style = 'color:#0057e7;'>'Gym Membership'</span> over the new year period</span>"
+  ) +
   xlab("Search Time") +
   labs(caption = "Gareth Burns | Data: Google Trend")
 
