@@ -101,7 +101,7 @@ ggplot(data, aes(
     label.family = "Noto",
     label.fontsize = 16,
     con.colour = c(GoogleBlue, GoogleGreen),
-    label.buffer = unit(15, 'mm')
+    label.buffer = unit(25, 'mm')
   ) +
   geom_segment(data = ArrowData, aes(x = x, y = y, xend = xend, yend = yend), arrow = arrow(length = unit(2, "mm")), colour = GoogleRed) +
   scale_color_manual(values = c(GoogleBlue, GoogleGreen)) +
@@ -121,28 +121,23 @@ ggplot(data, aes(
     ),
     panel.grid.major = element_blank(),
     panel.grid.minor = element_blank(),
-    plot.subtitle = element_text(
-      size = 20,
-      family = "Noto",
-      color = "red"
-    ),
     axis.title.x = element_text(
       color = GoogleRed,
       face = "bold",
-      size = 25,
+      size = 18,
       family = "Noto",
       margin = margin(t = 10)
     ),
     axis.title.y = element_blank(),
     axis.text.x = element_text(
       color = GoogleRed,
-      size = 20,
+      size = 16,
       family = "Noto"
     ),
     axis.text.y = element_text(
       color = GoogleRed,
       face = "bold",
-      size = 20,
+      size = 16,
       family = "Noto"
     ),
     axis.line.x = element_line(color = GoogleRed),
@@ -152,23 +147,24 @@ ggplot(data, aes(
     plot.caption = element_text(
       family = "Noto",
       colour = GoogleOrange,
-      size = 26
+      size = 14
     ),
     plot.margin = margin(rep(20, 4))
   ) +
   ggtitle(
-    label = "<span style = 'font-size:36pt'><b>Google Search Trends</b><br></span>
-          <span style = 'font-size:24pt'>Search Trends for <span style = 'color:#008744;'>'Hangover Cure'</span> and <span style = 'color:#0057e7;'>'Gym Membership'</span> over the new year period</span>"
+    label = "<span style = 'font-size:18pt'><b>Google Search Trends</b><br></span>
+          <span style = 'font-size:16pt'>Search Trends for <span style = 'color:#008744;'>'Hangover Cure'</span> and <span style = 'color:#0057e7;'>'Gym Membership'</span> over the new year period</span>"
   ) +
   xlab("Search Time") +
   labs(caption = "Gareth Burns | Data: Google Trend")
 
+gg_stop_recording()
 
 # For Camcorder
 gg_playback(
-  name = file.path("data", "recording", "202040101.gif"),
-  first_image_duration = 5,
-  last_image_duration = 15,
-  frame_duration = .4,
+  name = file.path("data", "recording", "202040103.gif"),
+  first_image_duration = 1,
+  last_image_duration = 10,
+  frame_duration = .1,
   image_resize = 800
 )
