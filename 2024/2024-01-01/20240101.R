@@ -79,7 +79,8 @@ gg_record(
   # height of saved image
   units = "in",
   # units for width and height
-  dpi = 300       # dpi to use when saving image
+  dpi = 300,       # dpi to use when saving image,
+  bg = "white"
 )
 
 ggplot(data, aes(
@@ -162,9 +163,10 @@ gg_stop_recording()
 
 # For Camcorder
 gg_playback(
-  name = file.path("data", "recording", "202040103.gif"),
+  name = file.path("data", "recording", "test.gif"),
   first_image_duration = 1,
   last_image_duration = 10,
   frame_duration = .1,
-  image_resize = 800
+  image_resize = 800,
+  bg = white
 )
