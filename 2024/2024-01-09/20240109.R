@@ -17,7 +17,6 @@ library(camcorder)
 
 tuesdata <- tt_load('2024-01-09')
 
-
 # Data Wrangling ----------------------------------------------------------
 data <- tuesdata$nhl_rosters |>
   filter(season == 20232024, !(birth_country %in% c("CAN", "USA"))) |>
@@ -71,6 +70,8 @@ plot <- ggplot(data) +
   scale_fill_distiller(type = "seq",
                         direction = -1,
                         palette = "Greys") +
+  # Make it circular!
+  coord_polar() +
   # Annotate custom scale inside plot
   annotate(
     x = 11.7,
@@ -78,7 +79,6 @@ plot <- ggplot(data) +
     label = "25",
     geom = "text",
     color = "white",
-    family = "Bell MT"
   ) +
   annotate(
     x = 11.7,
@@ -86,7 +86,6 @@ plot <- ggplot(data) +
     label = "50",
     geom = "text",
     color = "white",
-    family = "Bell MT"
   ) +
   annotate(
     x = 11.7,
@@ -94,7 +93,6 @@ plot <- ggplot(data) +
     label = "75",
     geom = "text",
     color = "white",
-    family = "Bell MT"
   ) +
   # Scale y axis so bars don't start in the center
   scale_y_continuous(
@@ -117,62 +115,23 @@ plot <- ggplot(data) +
     text = element_text(color = "gray12"),
 
     # Customize the text in the title, subtitle, and caption
-    plot.title = element_text(face = "bold", size = 25, hjust = 0.05),
-    plot.subtitle = element_text(size = 14, hjust = 0.05),
-    plot.caption = element_text(size = 10, hjust = .5),
+    plot.title = element_text(face = "bold", size = 20),
+    plot.subtitle = element_text(size = 15),
+    plot.caption = element_text(size = 12),
 
     # Make the background white and remove extra grid lines
     panel.background = element_rect(fill = "white"),
     panel.grid = element_blank(),
     panel.grid.major.x = element_blank()
   ) +
-  # Make it circular!
-  coord_polar()
+  labs(
+    title = "Nationality of Foreign Players in NHL",
+    subtitle =
+      "\nIn the latest NHL season there were 798 players born outside of North America. These\ncame from 19 different countries with 50% of players coming from Nordic countries ",
+    caption = "Plot: Gareth Burns | #TidyTuesday")
 
-plot
-
-ggdraw(plot) + draw_image(image, scale = 0.2)
-
-
-
-labs(
-  title = "\Nationality of Foreign Players in NHL",
-  subtitle = paste(
-    "\nThis Visualisation shows the cummulative length of tracks,",
-    "the amount of tracks and the mean gain in elevation per location.\n",
-    "If you are an experienced hiker, you might want to go",
-    "to the North Cascades since there are a lot of tracks,",
-    "higher elevations and total length to overcome.",
-    sep = "\n"
-  ),
-  caption = "\n\nData Visualisation by Tobias Stalder\ntobias-stalder.netlify.app\nSource: TidyX Crew (Ellis Hughes, Patrick Ward)\nLink to Data: github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-11-24/readme.md") +
+# Adding Logo
+ggdraw(plot) + draw_image(image, scale = 0.2, vjust = 0.06)
 
 
-# For Camcorder using vignette arguments
-gg_record(
-  dir = file.path("data", "recording"),
-  # where to save the recording
-  device = "png",
-  # device to use to save images
-  width = 6,
-  # width of saved image
-  height = 4,
-  # height of saved image
-  units = "in",
-  # units for width and height
-  dpi = 300,       # dpi to use when saving image,
-  bg = "white"
-)
 
-
-# For Camcorder
-gg_stop_recording()
-
-gg_playback(
-  name = file.path("data", "recording", "test.gif"),
-  first_image_duration = 1,
-  last_image_duration = 10,
-  frame_duration = .1,
-  image_resize = 800,
-  bg = "white"
-)
