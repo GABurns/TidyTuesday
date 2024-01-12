@@ -31,7 +31,6 @@ background <- data.frame(country = unique(data$birth_country), n = max(data$coun
 image <- image_read("https://1000logos.net/wp-content/uploads/2017/05/NHL-Logo.png")
 
 
-
 # Plot --------------------------------------------------------------------
 
 plot <- ggplot(data) +
@@ -110,15 +109,12 @@ plot <- ggplot(data) +
     axis.text.x = element_text(color = "gray12", size = 12),
     # Move the legend to the bottom
     legend.position = "none",
-
     # Set default color and font family for the text
     text = element_text(color = "gray12"),
-
     # Customize the text in the title, subtitle, and caption
     plot.title = element_text(face = "bold", size = 20),
     plot.subtitle = element_text(size = 15),
     plot.caption = element_text(size = 12),
-
     # Make the background white and remove extra grid lines
     panel.background = element_rect(fill = "white"),
     panel.grid = element_blank(),
