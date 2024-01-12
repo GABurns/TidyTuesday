@@ -19,7 +19,16 @@ I've 2 young kids so I'm going to pick challenages where I want to use a new pac
   <img src="https://github.com/GABurns/TidyTuesday/blob/main/2024/2024-01-01/20240103.png?raw=true" width="60%">
 </p>
 
+### 'Making of' Animations
+
+The use of the [camcorder](https://cran.r-project.org/web/packages/camcorder/index.html) 📦 to showcase the journey of making the data visualisations.
+
+<p align="center">
+  <img src="https://github.com/GABurns/TidyTuesday/blob/main/2024/2024-01-09/20240109.gif?raw=true" width="60%">
+</p>
+
 [^1]: Focus tends on an figure to provide implied authority rather than a data story.
 [^2]: Scientific journal papers were often demanding b&w for printing and wanted as much information as possible that it 
 generally made more sense to include a table.
 [^3]: PowerPoint....the bane of my life.
+
