@@ -1,4 +1,4 @@
-# Title: BYOD TidyTuesday
+# Title:  Canadian Hockey Player Birth Months
 # Author: Gareth Burns
 # Creation Date: 09/01/2024
 # Description: Circular barplot styled to look like hockey puck
