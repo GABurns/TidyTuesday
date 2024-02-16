@@ -1,7 +1,7 @@
 # Title:  Loveheart
 # Author: Gareth Burns
 # Creation Date: 16/02/2024
-# Description: Circular barplot styled to look like hockey puck
+# Description: Dumbbell plot styled in Love Hearts theme for valentines day
 # Link: Based off https://r-graph-gallery.com/web-dumbbell-chart-with-a-gap-column.html
 
 # Load Libraries ----------------------------------------------------------
