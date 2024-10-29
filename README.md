@@ -19,6 +19,12 @@ I've 2 young kids so I'm going to pick challenages where I want to use a new pac
   <img src="https://github.com/GABurns/TidyTuesday/blob/main/2024/2024-01-01/20240103.png?raw=true" width="60%">
 </p>
 
+### Love Hearts (Valentines Day)
+
+<p align="center">
+  <img src="https://github.com/GABurns/TidyTuesday/blob/main/2024/2024-02-13/20240213.png?raw=true" width="60%">
+</p>
+
 ### 'Making of' Animations
 
 The use of the [camcorder](https://cran.r-project.org/web/packages/camcorder/index.html) 📦 to showcase the journey of making the data visualisations.
